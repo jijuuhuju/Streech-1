@@ -6,6 +6,7 @@
     <meta name="google" value="notranslate">
     <title>ストリーチ 3.0 GUI</title>
     <style>
+      /* ❌ 邪魔でうざかった「緑の帯」や「色反転フィルター」は完全に地球上から消去しました */
       html, body {
         width: 100%; height: 100%; margin: 0; padding: 0;
         overflow: hidden; background-color: #ffffff;
@@ -15,33 +16,21 @@
         transform: scale(0.8);
         transform-origin: top left;
       }
-      /* 窓の上から重ねるストリーチ専用ヘッダー */
-      .streach-header-cover {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 40px;
-        background-color: #2E7D32;
-        opacity: 0.9;
-        z-index: 9999;
-        pointer-events: none; /* 下のメニューやアカウントを快適に押せる */
-      }
     </style>
   </head>
   <body>
-    <div class="streach-header-cover"></div>
-
     <script>
-      // 💡 エディタのバグに削られないように、すべてのURLを普通の文字としてバラバラに分割します！
+      // 💡 エディタのバグを防ぎつつ、拡張機能を強制合体させます
       const site1 = "https://mssbgc";
       const site2 = ".github.io/scratch/";
-      const baseSite = site1 + site2; // お手本サイトのフル住所
+      const baseSite = site1 + site2;
       
       const ext1 = "https://sheeptester";
       const ext2 = ".github.io/scratch-gui/generated-extensions/custom-blocks.js";
-      const extSite = ext1 + ext2; // 拡張機能のフル住所
+      const extSite = ext1 + ext2;
       
-      // 2つを合体させて、セキュリティの壁を突破する最強の鍵を作ります
-      const fullURL = baseSite + "?extension=" + extSite;
+      // 本家エディタに「サイズ限界突破」と「カスタムブロック」を同時に注入する命令
+      const fullURL = baseSite + "?turbo=true&addons=drag-past-edge,clones&extension=" + extSite;
       
       const iframe = document.createElement('iframe');
       iframe.src = fullURL;
