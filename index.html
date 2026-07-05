@@ -14,59 +14,38 @@
         width: 125%; height: 125%; border: none;
         transform: scale(0.8);
         transform-origin: top left;
-        filter: hue-rotate(140deg) brightness(0.95) contrast(1.1);
+      }
+      /* 窓の上から重ねるストリーチ専用ヘッダー */
+      .streach-header-cover {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 40px;
+        background-color: #2E7D32;
+        opacity: 0.9;
+        z-index: 9999;
+        pointer-events: none; /* 下のメニューやアカウントを快適に押せる */
       }
     </style>
   </head>
   <body>
-    <script>
-      const part1 = "https://mssbgc";
-      const part2 = ".github.io/scratch/";
-      const fullURL = part1 + part2;
+    <div class="streach-header-cover"></div>
 
+    <script>
+      // 💡 エディタのバグに削られないように、すべてのURLを普通の文字としてバラバラに分割します！
+      const site1 = "https://mssbgc";
+      const site2 = ".github.io/scratch/";
+      const baseSite = site1 + site2; // お手本サイトのフル住所
+      
+      const ext1 = "https://sheeptester";
+      const ext2 = ".github.io/scratch-gui/generated-extensions/custom-blocks.js";
+      const extSite = ext1 + ext2; // 拡張機能のフル住所
+      
+      // 2つを合体させて、セキュリティの壁を突破する最強の鍵を作ります
+      const fullURL = baseSite + "?extension=" + extSite;
+      
       const iframe = document.createElement('iframe');
       iframe.src = fullURL;
       document.body.appendChild(iframe);
-
-      // 🔓 【ストリーチ・拡張機能注入システム】
-      iframe.onload = function() {
-          try {
-              // 窓の向こう側のScratchのエンジン（VM）をキャッチ！
-              const vm = iframe.contentWindow.vm || iframe.contentWindow.Scratch?.vm;
-              
-              if (vm) {
-                  // 1. 【大きさ制限をなくす】
-                  // スプライトのサイズ制限を管理している本家の関数を上書きして、制限を完全に消し去ります！
-                  if (vm.runtime) {
-                      vm.runtime.setSpriteSizeLimit = function() { return false; }; // 制限を常にパス
-                  }
-
-                  // 2. 【自分でカスタムブロックを作れるシステム】
-                  // あなたのストリーチのパレットの一番下に「カスタム開発カテゴリ」を自動で1個付け足します！
-                  vm.runtime.registerExtensionExtension = {
-                      getInfo: () => ({
-                          id: 'streachCustom',
-                          name: 'ストリーチ開発ブロック',
-                          color1: '#2E7D32', // ストリーチの緑色
-                          blocks: [
-                              {
-                                  opcode: 'makeNewBlock',
-                                  blockType: 'command',
-                                  text: '新しいブロック [NAME] (色: [COLOR]) を自作する',
-                                  arguments: {
-                                      NAME: { type: 'string', defaultValue: 'ぼかし効果を追加' },
-                                      COLOR: { type: 'string', defaultValue: 'purple' }
-                                  }
-                              }
-                          ]
-                      })
-                  };
-                  console.log("ストリーチ限定・拡張機能が覚醒しました！");
-              }
-          } catch(e) {
-              console.log("読み込み待機中...");
-          }
-      };
     </script>
   </body>
 </html>
