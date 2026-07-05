@@ -1,0 +1,16 @@
+{
+  "name": "streach",
+  "version": "1.0.0",
+  "description": "緑のテーマと伝説の隠しブロックを搭載したScratch上位互換サイト",
+  "main": "index.html",
+  "scripts": {
+    "start": "webpack-dev-server --config webpack.config.js",
+    "build": "webpack --config webpack.config.js"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "scratch-gui": "scratchfoundation/scratch-gui#develop",
+    "scratch-vm": "scratchfoundation/scratch-vm#develop"
+  }
+}
