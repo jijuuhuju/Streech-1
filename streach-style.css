@@ -1,0 +1,23 @@
+/* ==========================================
+ *  ストリーチ（streach）専用・緑のテーマ設定
+ * ========================================== */
+
+/* 1. 画面一番上のヘッダーを青から「フォレストグリーン」にする */
+[class^="menu-bar_menu-bar_"] {
+    background-color: #2E7D32 !important; /* 深い緑 */
+}
+
+/* 2. ステージ上の「緑の旗（スタートボタン）」を目立たせる */
+[class^="green-flag_green-flag_"] {
+    background-color: #4CAF50 !important; /* 鮮やかな緑 */
+}
+
+/* 3. 選択中のコスチュームや、音のタブの枠線を緑にする */
+[class^="tab_is-selected_"] {
+    border-bottom: 4px solid #8BC34A !important; /* 黄緑 */
+}
+
+/* 4. サインインや言語切り替えボタンの背景色 */
+[class^="menu-bar_account-nav-menu_"] {
+    background-color: #1B5E20 !important; /* さらに濃い緑 */
+}
